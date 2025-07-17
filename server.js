@@ -20,8 +20,9 @@ mongoose
     `mongodb+srv://${dbuser}:${dbpass}@anaquest.jrelbej.mongodb.net/merncafe?retryWrites=true&w=majority&appName=AnaQuest`
   )
   .then(() => {
-    app.listen(8080, () => {
-      console.log("Server started on port 8080");
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT, () => {
+      console.log(`Server started on port ${PORT}`);
     });
   })
   .catch((error) => {
@@ -31,3 +32,6 @@ mongoose
 // Routes
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
+
+// Add static file serving
+app.use(express.static("public"));
